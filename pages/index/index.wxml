@@ -1,0 +1,130 @@
+<view class="container">
+  <!-- 学习进度卡片 -->
+  <view class="progress-section">
+    <view class="progress-card card">
+      <view class="progress-date">{{currentDate}}</view>
+      <view class="progress-header">
+        <text class="progress-title">{{greeting}}</text>
+        <text class="progress-subtitle">继续加油！</text>
+      </view>
+      <view class="progress-stats">
+        <view class="stat-large">
+          <text class="stat-value">{{dueCount + newCount}}</text>
+          <text class="stat-label">可学习</text>
+        </view>
+        <view class="stat-divider-vertical"></view>
+        <view class="stat-large">
+          <text class="stat-value">{{overdueCount}}</text>
+          <text class="stat-label">已过期</text>
+        </view>
+        <view class="stat-divider-vertical"></view>
+        <view class="stat-large">
+          <text class="stat-value">{{continuousDays}}</text>
+          <text class="stat-label">连续天数</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 快捷操作 -->
+  <view class="quick-actions-section">
+    <view class="action-card primary" bindtap="startReview">
+      <view class="action-icon-wrap">
+        <text class="action-icon-large">📚</text>
+      </view>
+      <text class="action-title">开始学习</text>
+      <text class="action-subtitle" wx:if="{{dueCount + newCount > 0}}">{{dueCount + newCount}} 张卡片待学习</text>
+    </view>
+    <view class="action-card" bindtap="browseCards">
+      <view class="action-icon-wrap">
+        <text class="action-icon-large">📖</text>
+      </view>
+      <text class="action-title">卡片库</text>
+      <text class="action-subtitle">共 {{totalCount}} 张卡片</text>
+    </view>
+  </view>
+
+  <!-- 提醒卡片 -->
+  <view class="section" wx:if="{{overdueCount > 0}}">
+    <view class="section-header">
+      <text class="section-title">提醒</text>
+    </view>
+    <view class="reminder-card overdue" bindtap="reviewOverdue">
+      <view class="reminder-icon">⚠️</view>
+      <view class="reminder-content">
+        <text class="reminder-title">有 {{overdueCount}} 张卡片已过期</text>
+        <text class="reminder-desc">尽快复习以巩固记忆</text>
+      </view>
+      <text class="reminder-arrow">›</text>
+    </view>
+  </view>
+
+  <view class="section" wx:if="{{newCount > 0}}">
+    <view class="new-cards-card" bindtap="startReview">
+      <view class="reminder-icon">✨</view>
+      <view class="reminder-content">
+        <text class="reminder-title">有 {{newCount}} 张新卡片</text>
+        <text class="reminder-desc">开始学习新知识</text>
+      </view>
+      <text class="reminder-arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 掌握程度 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">掌握程度</text>
+      <text class="section-more" bindtap="goStats">查看详情</text>
+    </view>
+    <view class="mastery-card card">
+      <view class="mastery-list">
+        <view class="mastery-item" wx:for="{{masteryLevels}}" wx:key="value">
+          <view class="mastery-info">
+            <view class="mastery-dot" style="background-color: {{item.color}}"></view>
+            <text class="mastery-label">{{item.label}}</text>
+          </view>
+          <view class="mastery-bar-bg">
+            <view class="mastery-bar-fill" style="width: {{item.percent}}%; background-color: {{item.color}}"></view>
+          </view>
+          <text class="mastery-count">{{item.count}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 最近添加 -->
+  <view class="section" wx:if="{{recentCards.length > 0}}">
+    <view class="section-header">
+      <text class="section-title">最近添加</text>
+      <text class="section-more" bindtap="browseCards">全部</text>
+    </view>
+    <view class="recent-item" wx:for="{{recentCards}}" wx:key="id" bindtap="viewCard" data-id="{{item.id}}">
+      <view class="recent-content">
+        <text class="recent-question ellipsis-2">{{item.question}}</text>
+        <view class="recent-tags" wx:if="{{item.tags && item.tags.length > 0}}">
+          <text class="tag-sm" wx:for="{{item.tags}}" wx:for-item="tag" wx:key="*this">{{tag}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{totalCount === 0}}">
+    <view class="empty-icon">📝</view>
+    <text class="empty-title">还没有卡片</text>
+    <text class="empty-desc">导入 Excel/CSV 或手动添加卡片开始学习</text>
+    <view class="empty-actions">
+      <view class="action-card empty-action" bindtap="goImport">
+        <text class="action-icon">📥</text>
+        <text class="action-text">导入数据</text>
+      </view>
+      <view class="action-card empty-action" bindtap="addCard">
+        <text class="action-icon">✍️</text>
+        <text class="action-text">手动添加</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部安全区 -->
+  <view class="bottom-safe"></view>
+</view>

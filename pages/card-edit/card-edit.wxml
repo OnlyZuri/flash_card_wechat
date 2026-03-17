@@ -1,0 +1,119 @@
+<view class="container">
+  <!-- 表单内容 -->
+  <scroll-view class="form-scroll" scroll-y enable-flex>
+    <view class="form-content">
+      <!-- 问题卡片 -->
+      <view class="input-card">
+        <view class="card-header">
+          <view class="header-icon question-icon">❓</view>
+          <view class="header-info">
+            <text class="card-title">问题</text>
+            <text class="card-desc">请输入要记忆的内容</text>
+          </view>
+        </view>
+        <view class="input-wrapper">
+          <textarea
+            class="form-textarea"
+            placeholder="例如：JavaScript 中什么是闭包？"
+            placeholder-class="placeholder"
+            value="{{question}}"
+            bindinput="onQuestionInput"
+            maxlength="1000"
+            auto-height
+            fixed-height
+          />
+        </view>
+      </view>
+
+      <!-- 答案卡片 -->
+      <view class="input-card">
+        <view class="card-header">
+          <view class="header-icon answer-icon">💡</view>
+          <view class="header-info">
+            <text class="card-title">答案</text>
+            <text class="card-desc">请输入对应的答案内容</text>
+          </view>
+        </view>
+        <view class="input-wrapper">
+          <textarea
+            class="form-textarea"
+            placeholder="例如：闭包是指有权访问另一个函数作用域中变量的函数..."
+            placeholder-class="placeholder"
+            value="{{answer}}"
+            bindinput="onAnswerInput"
+            maxlength="2000"
+            auto-height
+            fixed-height
+          />
+        </view>
+      </view>
+
+      <!-- 标签卡片 -->
+      <view class="input-card">
+        <view class="card-header">
+          <view class="header-icon tag-icon">🏷️</view>
+          <view class="header-info">
+            <text class="card-title">标签</text>
+            <text class="card-desc">用逗号分隔多个标签</text>
+          </view>
+        </view>
+        <view class="input-wrapper">
+          <input
+            class="form-input"
+            placeholder="例如：Java, 多线程，并发"
+            placeholder-class="placeholder"
+            value="{{tagInput}}"
+            bindinput="onTagInput"
+          />
+        </view>
+        <view class="tag-list" wx:if="{{tags.length > 0}}">
+          <view class="tag-item" wx:for="{{tags}}" wx:key="*this">
+            <text class="tag-text">{{item}}</text>
+            <text class="tag-remove" bindtap="removeTag" data-index="{{index}}">✕</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 已有卡片信息 -->
+      <view class="info-card" wx:if="{{isEdit && cardInfo}}">
+        <view class="info-header">
+          <text class="info-icon">📊</text>
+          <text class="info-title">卡片信息</text>
+        </view>
+        <view class="info-grid">
+          <view class="info-item">
+            <text class="info-label">创建时间</text>
+            <text class="info-value">{{cardInfo.createdAt}}</text>
+          </view>
+          <view class="info-item">
+            <text class="info-label">复习次数</text>
+            <text class="info-value">{{cardInfo.reviewCount}} 次</text>
+          </view>
+          <view class="info-item">
+            <text class="info-label">掌握程度</text>
+            <text class="info-value-level" style="color: {{cardInfo.levelColor}}; background: {{cardInfo.levelColor}}20">{{cardInfo.levelText}}</text>
+          </view>
+          <view class="info-item">
+            <text class="info-label">下次复习</text>
+            <text class="info-value">{{cardInfo.nextReview}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 底部占位，避免被按钮遮挡 -->
+      <view class="bottom-placeholder"></view>
+    </view>
+  </scroll-view>
+
+  <!-- 底部操作按钮 -->
+  <view class="action-bar">
+    <view class="action-btn delete-btn" wx:if="{{isEdit}}" bindtap="deleteCard">
+      <text class="btn-icon">🗑️</text>
+      <text class="btn-text">删除</text>
+    </view>
+    <view class="action-btn save-btn" bindtap="saveCard">
+      <text class="btn-icon">✓</text>
+      <text class="btn-text">保存卡片</text>
+    </view>
+  </view>
+</view>

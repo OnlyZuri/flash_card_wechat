@@ -1,0 +1,444 @@
+/* 首页样式 - Apple Design */
+
+.container {
+  min-height: 100vh;
+  background-color: #F2F2F7;
+  padding-bottom: 40rpx;
+}
+
+/* 学习进度卡片 */
+.progress-section {
+  padding: 24rpx 24rpx 0;
+  margin-bottom: 24rpx;
+}
+
+.progress-card {
+  background: linear-gradient(135deg, #007AFF 0%, #5AC8FA 100%);
+  color: #fff;
+  border-radius: 24rpx;
+}
+
+.progress-date {
+  font-size: 26rpx;
+  opacity: 0.9;
+  margin-bottom: 12rpx;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32rpx;
+}
+
+.progress-title {
+  font-size: 34rpx;
+  font-weight: 600;
+}
+
+.progress-subtitle {
+  font-size: 28rpx;
+  opacity: 0.9;
+}
+
+.progress-stats {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.stat-large {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.stat-value {
+  font-size: 56rpx;
+  font-weight: 700;
+  line-height: 1;
+  color: #FFFFFF !important;
+  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.15);
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: #FFFFFF;
+  opacity: 0.9;
+}
+
+.stat-divider-vertical {
+  width: 1rpx;
+  height: 60rpx;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* 快捷操作 */
+.quick-actions-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20rpx;
+  padding: 0 24rpx;
+  margin-bottom: 24rpx;
+}
+
+.action-card {
+  background: linear-gradient(135deg, #E8F4FD 0%, #CBE3F9 100%);
+  border-radius: 24rpx;
+  padding: 32rpx 24rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease;
+}
+
+.action-card:active {
+  transform: scale(0.96);
+}
+
+.action-card.primary {
+  background: linear-gradient(135deg, #5AC8FA 0%, #007AFF 100%);
+}
+
+.action-card.primary .action-title,
+.action-card.primary .action-subtitle {
+  color: #fff;
+}
+
+.action-icon-wrap {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 122, 255, 0.1);
+  transition: all 0.2s;
+}
+
+.action-card.primary .action-icon-wrap {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.action-card:not(.primary) .action-icon-wrap {
+  background: linear-gradient(135deg, #D4EBFA 0%, #B8DAF5 100%);
+}
+
+.action-icon-large {
+  font-size: 48rpx;
+}
+
+.action-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1C1C1E;
+}
+
+.action-subtitle {
+  font-size: 24rpx;
+  color: #8E8E93;
+}
+
+/* 区块 */
+.section {
+  padding: 0 24rpx;
+  margin-bottom: 24rpx;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16rpx 20rpx;
+  background: linear-gradient(135deg, #F8F9FA 0%, #E9ECEF 100%);
+  border-radius: 16rpx;
+  margin-bottom: 16rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1C1C1E;
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.section-title::before {
+  content: '';
+  width: 6rpx;
+  height: 28rpx;
+  background: linear-gradient(135deg, #007AFF 0%, #5AC8FA 100%);
+  border-radius: 4rpx;
+}
+
+.section-more {
+  font-size: 28rpx;
+  color: #fff;
+  font-weight: 600;
+  padding: 8rpx 16rpx;
+  background: linear-gradient(135deg, #007AFF 0%, #5AC8FA 100%);
+  border-radius: 20rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 122, 255, 0.3);
+  transition: all 0.2s;
+}
+
+.section-more:active {
+  background-color: rgba(0, 122, 255, 0.15);
+  transform: scale(0.95);
+}
+
+/* 提醒卡片 */
+.reminder-card,
+.new-cards-card {
+  display: flex;
+  align-items: center;
+  background-color: #FFFFFF;
+  border-radius: 20rpx;
+  padding: 28rpx 32rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.04);
+}
+
+.reminder-card.overdue {
+  background-color: #FFF5F5;
+  border: 1rpx solid #FFD5D5;
+}
+
+.reminder-card.overdue .reminder-title {
+  color: #E53935;
+}
+
+.reminder-card.overdue .reminder-desc {
+  color: #EF5350;
+}
+
+.reminder-card.overdue .reminder-arrow {
+  color: #EF5350;
+}
+
+.new-cards-card {
+  background-color: #F0FFF4;
+  border: 1rpx solid #C6F6D5;
+}
+
+.new-cards-card .reminder-title {
+  color: #2F855A;
+}
+
+.new-cards-card .reminder-desc {
+  color: #48BB78;
+}
+
+.new-cards-card .reminder-arrow {
+  color: #48BB78;
+}
+
+.reminder-icon {
+  font-size: 44rpx;
+  margin-right: 20rpx;
+}
+
+.reminder-content {
+  flex: 1;
+}
+
+.reminder-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1C1C1E;
+  margin-bottom: 6rpx;
+}
+
+.reminder-desc {
+  font-size: 26rpx;
+  color: #8E8E93;
+}
+
+.reminder-arrow {
+  font-size: 40rpx;
+  color: #007AFF;
+}
+
+/* 掌握程度卡片 */
+.mastery-card {
+  padding: 24rpx 32rpx;
+}
+
+.mastery-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.mastery-item {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.mastery-info {
+  display: flex;
+  align-items: center;
+  width: 100rpx;
+}
+
+.mastery-dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  margin-right: 10rpx;
+}
+
+.mastery-label {
+  font-size: 28rpx;
+  color: #1C1C1E;
+}
+
+.mastery-bar-bg {
+  flex: 1;
+  height: 12rpx;
+  background-color: #E5E5EA;
+  border-radius: 6rpx;
+  overflow: hidden;
+}
+
+.mastery-bar-fill {
+  height: 100%;
+  border-radius: 6rpx;
+  transition: width 0.3s ease;
+}
+
+.mastery-count {
+  width: 60rpx;
+  text-align: right;
+  font-size: 28rpx;
+  color: #8E8E93;
+  font-weight: 500;
+}
+
+/* 最近添加 */
+.recent-card {
+  padding: 0;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.recent-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 28rpx;
+  margin-bottom: 20rpx;
+  background-color: #FFFFFF;
+  border-radius: 20rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+  transition: all 0.2s;
+}
+
+.recent-item:active {
+  transform: scale(0.98);
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+}
+
+.recent-content {
+  width: 100%;
+  margin-right: 0;
+}
+
+.recent-question {
+  font-size: 32rpx;
+  color: #1C1C1E;
+  font-weight: 600;
+  margin-bottom: 16rpx;
+  line-height: 1.5;
+}
+
+.recent-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+}
+
+.tag-sm {
+  display: inline-block;
+  background: linear-gradient(135deg, #E8F4FD 0%, #F0F7FF 100%);
+  color: #007AFF;
+  padding: 8rpx 20rpx;
+  border-radius: 16rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+  border: 1rpx solid #B3D9FF;
+}
+
+.recent-arrow {
+  display: none;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 100rpx 40rpx;
+}
+
+.empty-icon {
+  font-size: 120rpx;
+  margin-bottom: 32rpx;
+}
+
+.empty-title {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #1C1C1E;
+  margin-bottom: 16rpx;
+}
+
+.empty-desc {
+  font-size: 28rpx;
+  color: #8E8E93;
+  margin-bottom: 48rpx;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.empty-actions {
+  display: flex;
+  gap: 24rpx;
+  justify-content: center;
+}
+
+.action-card.empty-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12rpx;
+  padding: 32rpx 48rpx;
+  background-color: #FFFFFF;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+  transition: all 0.2s;
+}
+
+.action-card.empty-action:active {
+  transform: scale(0.96);
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+}
+
+.action-card.empty-action .action-icon {
+  font-size: 56rpx;
+}
+
+.action-card.empty-action .action-text {
+  font-size: 28rpx;
+  color: #1C1C1E;
+  font-weight: 600;
+}
+
+/* 底部安全区 */
+.bottom-safe {
+  height: 60rpx;
+}

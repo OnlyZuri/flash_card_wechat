@@ -1,0 +1,49 @@
+<view class="container">
+  <!-- 学习设置 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">学习设置</text>
+    </view>
+    <view class="setting-card card">
+      <view class="setting-item">
+        <view class="setting-info">
+          <text class="setting-label">每次学习数量</text>
+          <text class="setting-desc">每次学习最多显示的卡片数量</text>
+        </view>
+        <view class="setting-control">
+          <view class="stepper">
+            <view class="stepper-btn" bindtap="decreaseCount">
+              <text class="stepper-icon">−</text>
+            </view>
+            <input class="stepper-input" type="number" value="{{settings.maxLearnCount}}" bindinput="onManualInput" />
+            <view class="stepper-btn" bindtap="increaseCount">
+              <text class="stepper-icon">+</text>
+            </view>
+          </view>
+          <text class="setting-unit">张</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 快捷操作 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">快捷操作</text>
+    </view>
+    <view class="action-card card">
+      <view class="action-item" bindtap="resetSettings">
+        <text class="action-icon">🔄</text>
+        <text class="action-text">恢复默认设置</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 保存按钮 -->
+  <view class="save-section">
+    <button class="save-btn" bindtap="saveSettings">保存设置</button>
+  </view>
+
+  <!-- 底部安全区 -->
+  <view class="bottom-safe"></view>
+</view>

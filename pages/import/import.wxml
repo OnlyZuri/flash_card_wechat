@@ -1,0 +1,78 @@
+<view class="container">
+  <!-- 导入说明 -->
+  <view class="section">
+    <view class="info-card">
+      <view class="info-icon">💡</view>
+      <view class="info-content">
+        <text class="info-title">如何导入？</text>
+        <text class="info-desc">CSV 文件：推荐使用，含逗号的内容用双引号包裹\nExcel 用户：请在 WPS/Excel 中另存为 CSV 格式</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 数据预览 -->
+  <view class="section" wx:if="{{previewData.length > 0}}">
+    <view class="section-header">
+      <text class="section-title">数据预览</text>
+      <text class="section-count">共 {{previewData.length}} 条</text>
+    </view>
+    <view class="preview-card card">
+      <scroll-view class="preview-scroll" scroll-y>
+        <view class="preview-list">
+          <view class="preview-header">
+            <view class="preview-col">问题</view>
+            <view class="preview-col">答案</view>
+            <view class="preview-col tags-col">标签</view>
+          </view>
+          <view class="preview-item" wx:for="{{previewData}}" wx:key="index" wx:for-item="row">
+            <view class="preview-col ellipsis">{{row.question}}</view>
+            <view class="preview-col ellipsis">{{row.answer}}</view>
+            <view class="preview-col tags-col">
+              <text class="tag-mini" wx:for="{{row.tags}}" wx:for-item="tag" wx:key="*this">{{tag}}</text>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+
+  <!-- 选项 -->
+  <view class="section" wx:if="{{previewData.length > 0}}">
+    <view class="option-card card">
+      <view class="option-item">
+        <text class="option-label">重复数据处理</text>
+        <picker class="option-picker" mode="selector" range="{{duplicateOptions}}" value="{{duplicateIndex}}" bindchange="onDuplicateChange">
+          <view class="option-value">
+            {{duplicateOptions[duplicateIndex]}}
+            <text class="arrow">›</text>
+          </view>
+        </picker>
+      </view>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-area">
+    <view class="btn-select" bindtap="selectFile">
+      <text class="btn-icon">📁</text>
+      <text class="btn-text">选择文件</text>
+    </view>
+    <view class="btn-import" wx:if="{{previewData.length > 0}}" bindtap="confirmImport">
+      确认导入 ({{previewData.length}}条)
+    </view>
+    <view class="btn-template" bindtap="downloadTemplate">下载模板</view>
+  </view>
+
+  <!-- 空状态提示 -->
+  <view class="tip-section" wx:if="{{previewData.length === 0}}">
+    <view class="tip-card">
+      <text class="tip-title">文件格式说明</text>
+      <view class="tip-list">
+        <text class="tip-item">• CSV 文件：使用逗号分隔，内容含逗号请用双引号包裹</text>
+        <text class="tip-item">• 第一列：问题（必填）</text>
+        <text class="tip-item">• 第二列：答案（必填）</text>
+        <text class="tip-item">• 第三列及之后：标签（可选，每列一个标签）</text>
+      </view>
+    </view>
+  </view>
+</view>

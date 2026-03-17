@@ -1,0 +1,190 @@
+/* 设置页面 - Apple Design */
+
+.container {
+  padding: 20rpx 24rpx;
+  background-color: #F2F2F7;
+  min-height: 100vh;
+}
+
+.section {
+  margin-bottom: 32rpx;
+}
+
+.section-header {
+  padding: 10rpx 0;
+  margin-bottom: 12rpx;
+}
+
+.section-title {
+  font-size: 28rpx;
+  color: #8E8E93;
+  font-weight: 500;
+}
+
+/* 通用卡片 */
+.card {
+  background-color: #FFFFFF;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+}
+
+/* 设置卡片 */
+.setting-card {
+  padding: 24rpx 32rpx;
+}
+
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16rpx 0;
+}
+
+.setting-info {
+  flex: 1;
+}
+
+.setting-label {
+  display: block;
+  font-size: 32rpx;
+  color: #1C1C1E;
+  margin-bottom: 8rpx;
+  font-weight: 600;
+}
+
+.setting-desc {
+  display: block;
+  font-size: 26rpx;
+  color: #8E8E93;
+}
+
+.setting-control {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+
+/* 步进器 */
+.stepper {
+  display: flex;
+  align-items: center;
+  background-color: #F2F2F7;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
+}
+
+.stepper-btn {
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #FFFFFF;
+  transition: all 0.2s;
+}
+
+.stepper-btn:active {
+  background-color: #E5E5EA;
+}
+
+.stepper-icon {
+  font-size: 44rpx;
+  color: #007AFF;
+  font-weight: 300;
+}
+
+.stepper-input {
+  width: 120rpx;
+  height: 80rpx;
+  text-align: center;
+  font-size: 36rpx;
+  color: #1C1C1E;
+  font-weight: 600;
+  background-color: transparent;
+}
+
+.stepper-input:focus {
+  background-color: #FFFFFF;
+}
+
+.setting-unit {
+  font-size: 30rpx;
+  color: #8E8E93;
+  font-weight: 500;
+  margin-left: 16rpx;
+}
+
+/* 快捷操作 */
+.action-card {
+  padding: 0 30rpx;
+}
+
+.action-item {
+  display: flex;
+  align-items: center;
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid #F2F2F7;
+}
+
+.action-item:last-child {
+  border-bottom: none;
+}
+
+.action-item:active {
+  background-color: #F2F2F7;
+}
+
+.action-icon {
+  font-size: 40rpx;
+  margin-right: 24rpx;
+  width: 56rpx;
+  height: 56rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #F2F2F7 0%, #E5E5EA 100%);
+  border-radius: 16rpx;
+}
+
+.action-text {
+  font-size: 32rpx;
+  color: #1C1C1E;
+  flex: 1;
+  font-weight: 500;
+}
+
+/* 保存按钮 */
+.save-section {
+  padding: 40rpx 30rpx;
+}
+
+.save-btn {
+  width: 100%;
+  height: 88rpx;
+  background: linear-gradient(135deg, #007AFF 0%, #0A5ED4 100%);
+  color: #FFFFFF;
+  font-size: 32rpx;
+  font-weight: 600;
+  border-radius: 16rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4rpx 12rpx rgba(0, 122, 255, 0.3);
+  transition: all 0.2s;
+}
+
+.save-btn::after {
+  border: none;
+}
+
+.save-btn:active {
+  transform: scale(0.96);
+  box-shadow: 0 2rpx 8rpx rgba(0, 122, 255, 0.2);
+}
+
+/* 底部安全区 */
+.bottom-safe {
+  height: env(safe-area-inset-bottom);
+}

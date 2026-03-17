@@ -1,0 +1,161 @@
+<view class="container">
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <view class="search-input">
+      <text class="search-icon">🔍</text>
+      <input
+        class="search-box"
+        placeholder="搜索问题、答案或标签"
+        placeholder-class="search-placeholder"
+        value="{{keyword}}"
+        bindinput="onSearchInput"
+        confirm-type="search"
+        bindconfirm="onSearch"
+      />
+      <text class="clear-icon" wx:if="{{keyword}}" bindtap="clearSearch">✕</text>
+    </view>
+  </view>
+
+  <!-- 标签筛选 -->
+  <scroll-view class="tag-scroll" scroll-x enable-flex>
+    <view class="tag-list">
+      <view
+        class="tag-item {{currentTag === '' ? 'active' : ''}}"
+        bindtap="selectTag"
+        data-tag=""
+      >
+        全部
+      </view>
+      <view
+        class="tag-item {{currentTag === item.name ? 'active' : ''}}"
+        wx:for="{{tags}}"
+        wx:key="name"
+        bindtap="selectTag"
+        data-tag="{{item.name}}"
+      >
+        {{item.name}} ({{item.count}})
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 卡片列表 -->
+  <view class="card-list">
+    <view class="list-header">
+      <text class="list-count">共 {{filteredCards.length}} 张卡片</text>
+      <view class="list-actions">
+        <view class="action-btn" bindtap="toggleBatchMode" wx:if="{{!batchMode}}">
+          <text class="action-btn-icon">☑️</text>
+          <text class="action-btn-text">批量</text>
+        </view>
+        <view class="action-btn batch-cancel" bindtap="toggleBatchMode" wx:if="{{batchMode}}">
+          <text class="action-btn-text">完成</text>
+        </view>
+        <view class="action-btn" bindtap="showAddMenu" wx:if="{{!batchMode}}">
+          <text class="action-btn-icon">+</text>
+          <text class="action-btn-text">添加</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 批量操作栏 -->
+    <view class="batch-toolbar" wx:if="{{batchMode}}">
+      <view class="batch-checkbox-all" bindtap="toggleSelectAll">
+        <view class="checkbox {{selectedIds.length === filteredCards.length && filteredCards.length > 0 ? 'checked' : ''}}">
+          <text wx:if="{{selectedIds.length === filteredCards.length && filteredCards.length > 0}}">✓</text>
+        </view>
+        <text class="batch-label">全选</text>
+      </view>
+      <view class="batch-actions">
+        <view class="batch-btn delete" bindtap="batchDelete">
+          删除 ({{selectedIds.length}})
+        </view>
+      </view>
+    </view>
+
+    <view wx:if="{{filteredCards.length === 0}}" class="empty-list">
+      <text class="empty-text">{{keyword ? '没有找到匹配的卡片' : '暂无卡片'}}</text>
+    </view>
+
+    <!-- 批量模式下的卡片列表 -->
+    <block wx:if="{{batchMode}}">
+      <view
+        class="card-item card {{item.selected ? 'selected' : ''}}"
+        wx:for="{{filteredCards}}"
+        wx:key="id"
+      >
+        <view class="card-checkbox" catchtap="toggleSelectOne" data-id="{{item.id}}">
+          <view class="checkbox {{item.selected ? 'checked' : ''}}">
+            <text wx:if="{{item.selected}}">✓</text>
+          </view>
+        </view>
+        <view class="card-question ellipsis-2 batch-mode">{{item.question}}</view>
+        <view class="card-meta">
+          <view class="card-tags" wx:if="{{item.tags && item.tags.length > 0}}">
+            <text class="tag-sm" wx:for="{{item.tags}}" wx:for-item="tag" wx:key="*this">{{tag}}</text>
+          </view>
+          <view class="card-status">
+            {{item.statusText}}
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <!-- 正常模式下的卡片列表 -->
+    <block wx:if="{{!batchMode}}">
+      <view
+        class="card-item card"
+        wx:for="{{filteredCards}}"
+        wx:key="id"
+        bindtap="viewCard"
+        data-id="{{item.id}}"
+      >
+        <view class="card-question ellipsis-2">{{item.question}}</view>
+        <view class="card-meta">
+          <view class="card-tags" wx:if="{{item.tags && item.tags.length > 0}}">
+            <text class="tag-sm" wx:for="{{item.tags}}" wx:for-item="tag" wx:key="*this">{{tag}}</text>
+          </view>
+          <view class="card-status" style="color: {{item.statusColor}}">
+            {{item.statusText}}
+          </view>
+        </view>
+        <view class="card-actions">
+          <view class="action-icon" bindtap="editCard" data-id="{{item.id}}">✏️</view>
+          <view class="action-icon" bindtap="deleteCard" data-id="{{item.id}}">🗑️</view>
+        </view>
+      </view>
+    </block>
+
+    <!-- 一键清空 -->
+    <view class="clear-all-section" wx:if="{{cards.length > 0 && !batchMode}}">
+      <view class="clear-all-btn" bindtap="clearAllCards">
+        <text class="clear-all-icon">🗑️</text>
+        <text class="clear-all-text">清空所有卡片</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 添加菜单 -->
+  <view class="add-menu" wx:if="{{showAddMenu}}" catchtap="hideAddMenu">
+    <view class="menu-mask"></view>
+    <view class="menu-content" catchtap="stopPropagation">
+      <view class="menu-item" bindtap="goImport">
+        <view class="menu-icon-wrapper import">
+          <text class="menu-icon">📁</text>
+        </view>
+        <view class="menu-info">
+          <text class="menu-text">导入 Excel/CSV</text>
+          <text class="menu-desc">批量添加卡片</text>
+        </view>
+      </view>
+      <view class="menu-item" bindtap="addManual">
+        <view class="menu-icon-wrapper manual">
+          <text class="menu-icon">✍️</text>
+        </view>
+        <view class="menu-info">
+          <text class="menu-text">手动添加</text>
+          <text class="menu-desc">单个创建卡片</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,11 @@
+问题，答案，标签 1，标签 2
+"Java 中==和 equals() 的区别？","==比较基本类型值或引用地址；equals() 默认比较地址，可重写比较内容","Java 基础","面试高频"
+"HashMap 的底层实现原理？","数组 + 链表 + 红黑树，jdk1.8 后链表长度>8 转红黑树","集合","Java 基础"
+"ArrayList 和 LinkedList 的区别？","ArrayList 基于动态数组；LinkedList 基于双向链表","集合","Java 基础"
+"String、StringBuilder、StringBuffer 的区别？","String 不可变；StringBuilder 可变非线程安全；StringBuffer 可变线程安全","Java 基础","字符串"
+"Java 中的访问修饰符有哪些？","private(私有)、default(默认)、protected(受保护)、public(公共)","Java 基础","面试高频"
+"什么是反射？","在运行时动态获取类的信息和操作类的方法","Java 高级","反射"
+"Java 中的泛型是什么？","参数化类型，允许在编译时检查类型安全","Java 高级","泛型"
+"Java 异常体系的根类是什么？","Throwable","Java 基础","异常"
+"Error 和 Exception 的区别？","Error 是系统错误无法捕获；Exception 是程序异常可以捕获","Java 基础","异常"
+"Checked Exception 和 Runtime Exception 的区别？","Checked 必须显式捕获或声明；Runtime 不强制处理","Java 基础","异常"

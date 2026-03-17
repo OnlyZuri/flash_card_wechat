@@ -1,0 +1,91 @@
+<view class="container">
+  <!-- 顶部操作栏 -->
+  <view class="list-header">
+    <view class="header-left">
+      <text class="info-title">回收站</text>
+      <text class="info-desc">删除的卡片将保留 3 天，超期将自动清空</text>
+    </view>
+    <view class="header-actions">
+      <view class="action-btn" bindtap="toggleBatchMode" wx:if="{{!batchMode}}">
+        <text class="action-btn-text">批量</text>
+      </view>
+      <view class="action-btn batch-cancel" bindtap="toggleBatchMode" wx:if="{{batchMode}}">
+        <text class="action-btn-text">完成</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 批量工具栏 -->
+  <view class="batch-toolbar" wx:if="{{batchMode}}">
+    <view class="batch-checkbox-all" bindtap="toggleSelectAll">
+      <view class="checkbox {{selectedIds.length === trashCards.length && trashCards.length > 0 ? 'checked' : ''}}">
+        <text wx:if="{{selectedIds.length === trashCards.length && trashCards.length > 0}}">✓</text>
+      </view>
+      <text class="batch-label">全选</text>
+    </view>
+    <view class="batch-actions">
+      <view class="batch-btn restore" bindtap="batchRestore">
+        恢复 ({{selectedIds.length}})
+      </view>
+      <view class="batch-btn delete" bindtap="batchPermanentlyDelete">
+        删除 ({{selectedIds.length}})
+      </view>
+    </view>
+  </view>
+
+  <!-- 按过期时间分组的卡片列表 -->
+  <view class="grouped-list" wx:if="{{groupedCards.length > 0}}">
+    <block wx:for="{{groupedCards}}" wx:key="date">
+      <!-- 分组头部 -->
+      <view class="group-header">
+        <view class="group-info">
+          <text class="group-date">{{item.date}}</text>
+          <text class="group-desc">{{item.dateDesc}}</text>
+        </view>
+        <view class="group-count">{{item.cards.length}}张</view>
+      </view>
+
+      <!-- 分组卡片 -->
+      <view class="group-cards">
+        <view
+          class="card-item {{itemCard.selected ? 'selected' : ''}} {{batchMode ? 'batch-mode' : ''}}"
+          wx:for="{{item.cards}}"
+          wx:key="id"
+          wx:for-item="itemCard"
+        >
+          <!-- 批量模式复选框 -->
+          <view class="card-checkbox" wx:if="{{batchMode}}" catchtap="toggleSelectOne" data-id="{{itemCard.id}}">
+            <view class="checkbox {{itemCard.selected ? 'checked' : ''}}">
+              <text wx:if="{{itemCard.selected}}">✓</text>
+            </view>
+          </view>
+
+          <!-- 卡片内容 -->
+          <view class="card-content" bindtap="onCardTap" data-id="{{itemCard.id}}">
+            <view class="card-question ellipsis-2">{{itemCard.question}}</view>
+            <view class="card-meta">
+              <view class="card-tags" wx:if="{{itemCard.tags && itemCard.tags.length > 0}}">
+                <text class="tag-sm" wx:for="{{itemCard.tags}}" wx:for-item="tag" wx:key="*this">{{tag}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{trashCards.length === 0}}">
+    <text class="empty-icon">🗑️</text>
+    <text class="empty-text">回收站空空如也</text>
+    <text class="empty-hint">被删除的卡片会显示在这里</text>
+  </view>
+
+  <!-- 一键清空 -->
+  <view class="clear-all-section" wx:if="{{trashCards.length > 0 && !batchMode}}">
+    <view class="clear-all-btn" bindtap="clearAll">
+      <text class="clear-all-icon">×</text>
+      <text class="clear-all-text">清空回收站</text>
+    </view>
+  </view>
+</view>

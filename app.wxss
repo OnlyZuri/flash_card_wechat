@@ -1,0 +1,152 @@
+/* 全局样式 - Apple Design */
+page {
+  background-color: #F2F2F7;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  font-size: 34rpx;
+  color: #1C1C1E;
+  box-sizing: border-box;
+  line-height: 1.5;
+}
+
+/* 通用容器 */
+.container {
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 苹果风格卡片 */
+.card {
+  background-color: #FFFFFF;
+  border-radius: 20rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.04);
+}
+
+/* 分组卡片样式 */
+.grouped-card {
+  background-color: #FFFFFF;
+  margin: 24rpx 0;
+  overflow: hidden;
+}
+
+.grouped-card .item {
+  padding: 28rpx 32rpx;
+  border-bottom: 1rpx solid #E5E5EA;
+}
+
+.grouped-card .item:last-child {
+  border-bottom: none;
+}
+
+/* 按钮样式 */
+.btn-primary {
+  background: linear-gradient(135deg, #007AFF 0%, #0A5ED4 100%);
+  color: #fff;
+  border-radius: 24rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  padding: 28rpx 48rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 122, 255, 0.3);
+}
+
+.btn-primary:active {
+  opacity: 0.7;
+  transform: scale(0.98);
+}
+
+/* 标签样式 */
+.tag {
+  display: inline-block;
+  background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+  color: #007AFF;
+  padding: 8rpx 20rpx;
+  border-radius: 16rpx;
+  font-size: 24rpx;
+  margin-right: 12rpx;
+  margin-bottom: 12rpx;
+  font-weight: 500;
+}
+
+/* 文字省略 */
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ellipsis-2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* 分割线 */
+.divider {
+  height: 1rpx;
+  background-color: #E5E5EA;
+  margin: 24rpx 0;
+}
+
+/* 苹果风格列表 */
+.ios-list .list-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 32rpx;
+  background-color: #FFFFFF;
+  border-bottom: 1rpx solid #E5E5EA;
+}
+
+.ios-list .list-item:last-child {
+  border-bottom: none;
+}
+
+/* 毛玻璃效果 */
+.blur-bg {
+  backdrop-filter: blur(20rpx);
+  -webkit-backdrop-filter: blur(20rpx);
+}
+
+/* 大标题 */
+.large-title {
+  font-size: 68rpx;
+  font-weight: 700;
+  color: #1C1C1E;
+  letter-spacing: -1rpx;
+}
+
+/* 副标题 */
+.subtitle {
+  font-size: 40rpx;
+  font-weight: 600;
+  color: #1C1C1E;
+}
+
+/* 说明文字 */
+.caption {
+  font-size: 26rpx;
+  color: #8E8E93;
+  font-weight: 400;
+}
+
+/* 操作按钮 */
+.action-btn-ios {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24rpx;
+  background-color: #FFFFFF;
+  border-radius: 16rpx;
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #007AFF;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+}
+
+.action-btn-ios:active {
+  background-color: #F2F2F7;
+  transform: scale(0.98);
+}

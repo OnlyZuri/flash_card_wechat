@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl:*)",
+      "WebFetch(domain:www.iconfinder.com)",
+      "Bash(powershell -Command \"Invoke-WebRequest -Uri 'https://img.icons8.com/ios/100/8E8E93/home.png' -OutFile 'E:\\\\闪卡小程序\\\\images\\\\home.png'\")",
+      "Bash(powershell -Command \"Invoke-WebRequest -Uri 'https://img.icons8.com/ios/100/007AFF/home.png' -OutFile 'E:\\\\闪卡小程序\\\\images\\\\home-active.png'\")",
+      "Bash(powershell -Command \"Invoke-WebRequest -Uri 'https://img.icons8.com/ios/100/8E8E93/cards.png' -OutFile 'E:\\\\闪卡小程序\\\\images\\\\cards.png'\")",
+      "Bash(powershell -Command \"Invoke-WebRequest -Uri 'https://img.icons8.com/ios/100/007AFF/cards.png' -OutFile 'E:\\\\闪卡小程序\\\\images\\\\cards-active.png'\")",
+      "Bash(powershell -Command \"Invoke-WebRequest -Uri 'https://img.icons8.com/ios/100/8E8E93/user-male-circle--v1.png' -OutFile 'E:\\\\闪卡小程序\\\\images\\\\mine.png'\")",
+      "Bash(powershell -Command \"Invoke-WebRequest -Uri 'https://img.icons8.com/ios/100/007AFF/user-male-circle--v1.png' -OutFile 'E:\\\\闪卡小程序\\\\images\\\\mine-active.png'\")",
+      "WebFetch(domain:cdn.sheetjs.com)",
+      "WebFetch(domain:cdnjs.cloudflare.com)",
+      "Bash(dir:*)",
+      "Bash(cd:*)",
+      "Bash(python3:*)",
+      "Bash(git config:*)"
+    ]
+  }
+}

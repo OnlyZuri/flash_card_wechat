@@ -1,0 +1,47 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/study/study",
+    "pages/cards/cards",
+    "pages/card-edit/card-edit",
+    "pages/import/import",
+    "pages/mine/mine",
+    "pages/stats/stats",
+    "pages/settings/settings",
+    "pages/trash/trash"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F2F2F7",
+    "navigationBarTitleText": "学习冲冲冲",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#8E8E93",
+    "selectedColor": "#007AFF",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "学习",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home-active.png"
+      },
+      {
+        "pagePath": "pages/cards/cards",
+        "text": "卡片",
+        "iconPath": "images/cards.png",
+        "selectedIconPath": "images/cards-active.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "images/mine.png",
+        "selectedIconPath": "images/mine-active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

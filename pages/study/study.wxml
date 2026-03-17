@@ -1,0 +1,132 @@
+<view class="study-container">
+  <!-- 顶部进度 -->
+  <view class="study-header" wx:if="{{!isComplete}}">
+    <view class="progress-info">
+      <view class="progress-bar">
+        <view class="progress-fill" style="width: {{((currentIndex + 1) / totalCount) * 100}}%"></view>
+      </view>
+      <text class="progress-text">{{currentIndex + 1}} / {{totalCount}}</text>
+    </view>
+    <view class="exit-btn" bindtap="closeStudy" wx:if="{{showExitButton}}">
+      <text class="exit-icon">⏹</text>
+      <text class="exit-text">退出</text>
+    </view>
+    <view class="close-btn" bindtap="closeStudy" wx:else>✕</view>
+  </view>
+
+  <!-- 卡片区域 -->
+  <view class="card-area" wx:if="{{!isComplete && totalCount > 0}}">
+    <view class="flashcard {{flipped ? 'flipped' : ''}}" bindtap="toggleFlip">
+      <view class="card-inner">
+        <!-- 正面：问题 -->
+        <view class="card-front">
+          <view class="card-label">问题</view>
+          <view class="card-content">{{currentCard.question}}</view>
+          <view class="card-tags" wx:if="{{currentCard.tags && currentCard.tags.length > 0}}">
+            <text class="tag" wx:for="{{currentCard.tags}}" wx:for-item="tag" wx:key="*this">{{tag}}</text>
+          </view>
+          <view class="flip-hint">
+            <text class="flip-icon">👆</text>
+            <text>点击翻转</text>
+          </view>
+        </view>
+
+        <!-- 反面：答案 -->
+        <view class="card-back">
+          <view class="card-label">答案</view>
+          <view class="card-content answer">{{currentCard.answer}}</view>
+          <view class="card-tags" wx:if="{{currentCard.tags && currentCard.tags.length > 0}}">
+            <text class="tag" wx:for="{{currentCard.tags}}" wx:for-item="tag" wx:key="*this">{{tag}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 掌握程度评分 -->
+  <view class="rating-area {{flipped ? 'show' : ''}}" wx:if="{{!isComplete && totalCount > 0}}">
+    <view class="rating-title">掌握程度</view>
+    <view class="rating-buttons">
+      <view
+        class="rating-btn"
+        style="background-color: {{item.color}}"
+        wx:for="{{masteryLevels}}"
+        wx:key="value"
+        bindtap="selectLevel"
+        data-level="{{item.value}}"
+      >
+        <text class="rating-label">{{item.label}}</text>
+        <text class="rating-desc">{{item.interval}} 天后复习</text>
+      </view>
+    </view>
+    <view class="action-buttons">
+      <view class="action-btn skip" bindtap="skipCard">跳过</view>
+      <view class="action-btn favorite" bindtap="toggleFavorite">
+        {{currentCard.isFavorite ? '⭐ 已收藏' : '☆ 收藏'}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 完成状态 -->
+  <view class="complete-state" wx:if="{{totalCount === 0 || isComplete}}">
+    <!-- 没有卡片 -->
+    <view wx:if="{{totalCount === 0}}">
+      <view class="complete-icon">📝</view>
+      <text class="complete-title">没有可学习的卡片</text>
+      <text class="complete-desc">去导入一些卡片开始学习吧</text>
+      <view class="complete-actions">
+        <view class="btn-home" bindtap="goHome">返回首页</view>
+        <view class="btn-browse" bindtap="browseCards">浏览卡片</view>
+      </view>
+    </view>
+
+    <!-- 学习完成统计 -->
+    <view wx:if="{{isComplete && totalCount > 0}}" class="stats-container">
+      <view class="stats-header">
+        <text class="stats-icon">🎉</text>
+        <text class="stats-title">学习完成!</text>
+      </view>
+
+      <view class="stats-summary">
+        <view class="summary-item">
+          <text class="summary-value">{{sessionStats.totalCount}}</text>
+          <text class="summary-label">学习卡片</text>
+        </view>
+        <view class="summary-divider"></view>
+        <view class="summary-item">
+          <text class="summary-value" style="color: {{masteryRate >= 60 ? '#34C759' : '#FF9500'}}">{{masteryRate}}%</text>
+          <text class="summary-label">掌握率</text>
+        </view>
+      </view>
+
+      <view class="stats-detail card">
+        <view class="detail-title">掌握程度分布</view>
+        <view class="detail-list">
+          <view class="detail-item" wx:for="{{levelStats}}" wx:key="value">
+            <view class="detail-info">
+              <view class="detail-dot" style="background-color: {{item.color}}"></view>
+              <text class="detail-label">{{item.label}}</text>
+            </view>
+            <view class="detail-bar-bg">
+              <view class="detail-bar-fill" style="width: {{item.percent}}%; background-color: {{item.color}}"></view>
+            </view>
+            <text class="detail-count">{{item.count}}张</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="stats-tips" wx:if="{{sessionStats.levelCounts[0] > 0}}">
+        <text class="tips-icon">💡</text>
+        <text class="tips-text">有 {{sessionStats.levelCounts[0]}} 张卡片标记为"生疏"，建议重点复习哦</text>
+      </view>
+
+      <view class="complete-actions">
+        <view class="btn-home" bindtap="goHome">返回首页</view>
+        <view class="btn-browse" bindtap="browseCards">浏览卡片</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部安全区 -->
+  <view class="bottom-safe"></view>
+</view>

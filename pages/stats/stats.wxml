@@ -1,0 +1,93 @@
+<view class="container">
+  <!-- 概览卡片 -->
+  <view class="overview-card card">
+    <view class="overview-header">
+      <text class="overview-title">学习概览</text>
+    </view>
+    <view class="overview-grid">
+      <view class="overview-item">
+        <text class="overview-value">{{stats.totalCount}}</text>
+        <text class="overview-label">总学习次数</text>
+      </view>
+      <view class="overview-item">
+        <text class="overview-value">{{stats.todayCount}}</text>
+        <text class="overview-label">今日学习</text>
+      </view>
+      <view class="overview-item">
+        <text class="overview-value">{{stats.continuousDays}}</text>
+        <text class="overview-label">连续天数</text>
+      </view>
+      <view class="overview-item">
+        <text class="overview-value">{{totalCards}}</text>
+        <text class="overview-label">卡片总数</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 掌握程度分布 -->
+  <view class="section-card card">
+    <view class="section-title">掌握程度分布</view>
+    <view class="level-list">
+      <view class="level-item" wx:for="{{levelStats}}" wx:key="label">
+        <view class="level-header">
+          <view class="level-info">
+            <view class="level-dot" style="background-color: {{item.color}}"></view>
+            <text class="level-label">{{item.label}}</text>
+          </view>
+          <text class="level-count">{{item.count}}张</text>
+        </view>
+        <view class="level-bar-bg">
+          <view class="level-bar-fill" style="width: {{item.percent}}%; background-color: {{item.color}}"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 卡片状态 -->
+  <view class="section-card card">
+    <view class="section-title">卡片状态</view>
+    <view class="status-grid">
+      <view class="status-item overdue">
+        <text class="status-value">{{overdueCount}}</text>
+        <text class="status-label">过期未复习</text>
+      </view>
+      <view class="status-item due">
+        <text class="status-value">{{dueCount}}</text>
+        <text class="status-label">今日到期</text>
+      </view>
+      <view class="status-item scheduled">
+        <text class="status-value">{{scheduledCount}}</text>
+        <text class="status-label">已安排</text>
+      </view>
+      <view class="status-item new">
+        <text class="status-value">{{newCount}}</text>
+        <text class="status-label">新卡片</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 标签统计 -->
+  <view class="section-card card" wx:if="{{tags.length > 0}}">
+    <view class="section-title">标签分布</view>
+    <view class="tag-list">
+      <view class="tag-item" wx:for="{{tags}}" wx:key="name">
+        <text class="tag-name">{{item.name}}</text>
+        <text class="tag-count">{{item.count}}张</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 最近学习记录 -->
+  <view class="section-card card" wx:if="{{recentLogs.length > 0}}">
+    <view class="section-title">最近学习记录</view>
+    <view class="log-list">
+      <view class="log-item" wx:for="{{recentLogs}}" wx:key="timestamp">
+        <view class="log-question ellipsis">{{item.question}}</view>
+        <view class="log-meta">
+          <text class="log-level" style="color: {{item.levelColor}}">{{item.levelText}}</text>
+          <text class="log-date">{{item.date}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
