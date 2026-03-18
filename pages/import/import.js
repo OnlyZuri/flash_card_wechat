@@ -157,19 +157,54 @@ Page({
           continue
         }
 
-        // 从第三列开始都是标签，每列可能包含多个逗号分隔的标签（支持中文逗号和英文逗号）
+        // 从第三列开始解析：标签、掌握程度、复习次数、上次复习、下次复习
         const tags = []
+        let level = 0
+        let reviewCount = 0
+        let lastReview = ''
+        let nextReview = ''
+
+        // 导出格式：问题，答案，标签，掌握程度，复习次数，上次复习，下次复习
         for (let j = 2; j < parts.length; j++) {
-          // 按逗号拆分每个标签列（支持英文逗号、中文逗号）
-          const tagParts = parts[j].split(/[,,]/).map(t => t.trim()).filter(t => t)
+          const part = parts[j].trim()
+
+          // 检测是否是掌握程度（生疏、模糊、熟悉、熟练）
+          if (['生疏', '模糊', '熟悉', '熟练'].includes(part)) {
+            level = ['生疏', '模糊', '熟悉', '熟练'].indexOf(part)
+            // 后面的列依次是复习次数、上次复习、下次复习
+            if (j + 1 < parts.length) {
+              reviewCount = parseInt(parts[j + 1]) || 0
+            }
+            if (j + 2 < parts.length) {
+              lastReview = parts[j + 2].trim()
+            }
+            if (j + 3 < parts.length) {
+              nextReview = parts[j + 3].trim()
+            }
+            break
+          }
+
+          // 否则作为标签处理（支持 | 分隔符和逗号分隔符）
+          // 导出格式用 | 分隔多个标签，但也支持逗号分隔
+          const tagParts = part.split(/[|,,]/).map(t => t.trim()).filter(t => t)
           tags.push(...tagParts)
         }
 
-        data.push({
+        const cardData = {
           question,
           answer,
           tags
-        })
+        }
+
+        // 如果有学习数据，加入卡片对象
+        if (level > 0 || reviewCount > 0 || lastReview || nextReview) {
+          cardData.level = level
+          cardData.reviewCount = reviewCount
+          cardData.lastReview = lastReview
+          cardData.nextReview = nextReview
+        }
+
+        data.push(cardData)
       }
     }
 
@@ -307,25 +342,35 @@ Page({
       return true
     })
 
-    const importedCount = cardStorage.saveBatch(newCards)
+    try {
+      const importedCount = cardStorage.saveBatch(newCards)
 
-    wx.hideLoading()
-    wx.showToast({
-      title: `成功导入 ${importedCount} 张`,
-      icon: 'success'
-    })
+      wx.hideLoading()
+      wx.showToast({
+        title: `成功导入 ${importedCount} 张`,
+        icon: 'success'
+      })
 
-    setTimeout(() => {
-      wx.navigateBack()
-    }, 1500)
+      setTimeout(() => {
+        wx.navigateBack()
+      }, 1500)
+    } catch (err) {
+      console.error('导入失败:', err)
+      wx.hideLoading()
+      wx.showModal({
+        title: '导入失败',
+        content: err.message || '未知错误',
+        showCancel: false
+      })
+    }
   },
 
   /**
    * 下载模板
    */
   downloadTemplate() {
-    // CSV 模板内容 - 使用正确的 CSV 格式
-    const template = '问题，答案，标签 1，标签 2\n"Java 中==和 equals () 的区别？","==比较值或地址；equals() 可重写比较内容","Java 基础","面试高频"\n"HashMap 的底层实现？","数组 + 链表 + 红黑树，jdk1.8 后链表长度>8 转红黑树","集合","Java 基础"'
+    // CSV 模板内容 - 完整格式（包含学习数据）
+    const template = '问题，答案，标签，掌握程度，复习次数，上次复习，下次复习\n"Java 中==和 equals () 的区别？","==比较值或地址；equals() 可重写比较内容","Java 基础，面试高频",熟练，5,2026-03-15,2026-04-15\n"HashMap 的底层实现？","数组 + 链表 + 红黑树，jdk1.8 后链表长度>8 转红黑树",集合，熟悉，3,2026-03-10,2026-03-25'
 
     const fileName = '闪卡导入模板.csv'
 
@@ -342,7 +387,7 @@ Page({
 
         wx.showModal({
           title: '模板已生成',
-          content: '可以选择用其他应用打开或保存文件',
+          content: '模板包含完整格式（问题，答案，标签，掌握程度，复习次数，上次复习，下次复习）\n\n可以选择用其他应用打开或保存文件',
           showCancel: false,
           confirmText: '打开文件',
           success: () => {

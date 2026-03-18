@@ -63,13 +63,18 @@ export const cardStorage = {
 
     cards.forEach(card => {
       const index = allCards.findIndex(c => c.id === card.id || c.question === card.question)
+
+      // 如果卡片包含学习数据（level、reviewCount、lastReview、nextReview），则保留
+      const hasReviewData = card.level !== undefined || card.reviewCount !== undefined ||
+                            card.lastReview !== undefined || card.nextReview !== undefined
+
       const newCard = {
         ...card,
         id: card.id || generateId(),
-        level: card.level !== undefined ? card.level : 0,
-        nextReview: today,  // 新导入的卡片默认今天可学习
-        lastReview: null,   // 新卡片没有学习过
-        reviewCount: 0,     // 复习次数归零
+        level: hasReviewData ? (card.level !== undefined ? card.level : 0) : 0,
+        nextReview: hasReviewData ? (card.nextReview || today) : today,
+        lastReview: hasReviewData ? (card.lastReview || null) : null,
+        reviewCount: hasReviewData ? (card.reviewCount || 0) : 0,
         createdAt: card.createdAt || new Date().toISOString(),
         updatedAt: new Date().toISOString()
       }
@@ -81,7 +86,13 @@ export const cardStorage = {
       }
     })
 
-    wx.setStorageSync(STORAGE_KEYS.CARDS, allCards)
+    try {
+      wx.setStorageSync(STORAGE_KEYS.CARDS, allCards)
+    } catch (err) {
+      console.error('保存卡片失败:', err)
+      throw err
+    }
+
     return allCards.length
   },
 

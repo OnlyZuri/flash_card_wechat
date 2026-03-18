@@ -38,11 +38,17 @@
   font-size: 36rpx;
   font-weight: bold;
   margin-bottom: 8rpx;
+  color: #FFFFFF;
 }
 
 .user-desc {
   font-size: 26rpx;
   opacity: 0.9;
+  color: #FFFFFF;
+}
+
+.user-desc:focus {
+  outline: none;
 }
 
 .stats-row {
@@ -141,4 +147,138 @@
   font-size: 40rpx;
   color: #C7C7CC;
   transition: transform 0.2s;
+}
+
+/* 导出弹窗 */
+.export-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.export-modal .export-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.export-modal .export-content {
+  position: relative;
+  width: 600rpx;
+  background-color: #FFFFFF;
+  border-radius: 24rpx;
+  padding: 32rpx;
+  z-index: 1001;
+}
+
+.export-modal .export-title {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: #1C1C1E;
+  text-align: center;
+  margin-bottom: 32rpx;
+}
+
+.export-modal .export-options {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.export-modal .export-option {
+  display: flex;
+  align-items: center;
+  padding: 24rpx;
+  background-color: #F5F5F7;
+  border-radius: 16rpx;
+  transition: all 0.2s;
+}
+
+.export-modal .export-option.active {
+  background-color: #E8F4FF;
+  border: 2rpx solid #007AFF;
+}
+
+.export-modal .option-icon {
+  font-size: 48rpx;
+  margin-right: 20rpx;
+}
+
+.export-modal .option-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+}
+
+.export-modal .option-name {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #1C1C1E;
+}
+
+.export-modal .option-desc {
+  font-size: 24rpx;
+  color: #8E8E93;
+}
+
+.export-modal .radio {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  border: 2rpx solid #C7C7CC;
+  margin-left: 16rpx;
+  transition: all 0.2s;
+}
+
+.export-modal .radio.checked {
+  border-color: #007AFF;
+  background-color: #007AFF;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+  background-size: 24rpx;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.export-modal .export-actions {
+  display: flex;
+  gap: 16rpx;
+  margin-top: 32rpx;
+}
+
+.export-modal .export-btn {
+  flex: 1;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16rpx;
+  font-size: 32rpx;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.export-modal .export-btn.cancel {
+  background-color: #F5F5F7;
+  color: #1C1C1E;
+}
+
+.export-modal .export-btn.confirm {
+  background: linear-gradient(135deg, #007AFF 0%, #0A5ED4 100%);
+  color: #FFFFFF;
+  box-shadow: 0 4rpx 12rpx rgba(0, 122, 255, 0.3);
+}
+
+.export-modal .export-btn:active {
+  opacity: 0.7;
+  transform: scale(0.98);
 }
