@@ -180,20 +180,21 @@ Page({
   exportCards(cards) {
     wx.showLoading({ title: '生成文件中...' })
 
-    // 生成 CSV 内容
-    let csvContent = '问题，答案，标签，掌握程度，复习次数，上次复习，下次复习\n'
+    // 生成 CSV 内容（使用英文逗号分隔，引号包裹可能含逗号的字段）
+    let csvContent = 'question,answer,tags,level,reviewCount,lastReview,nextReview\n'
 
     cards.forEach(card => {
       const levelText = ['生疏', '模糊', '熟悉', '熟练'][card.level || 0]
-      const tags = (card.tags || []).join('|')
+      // 标签用英文分号分隔，避免与 CSV 分隔符混淆
+      const tags = (card.tags || []).join(';')
       const lastReview = card.lastReview || ''
       const nextReview = card.nextReview || ''
 
-      // 处理可能包含逗号的内容
+      // 处理可能包含逗号或引号的内容，用引号包裹并转义内部引号
       const question = `"${(card.question || '').replace(/"/g, '""')}"`
       const answer = `"${(card.answer || '').replace(/"/g, '""')}"`
 
-      csvContent += `${question},${answer},${tags},${levelText},${card.reviewCount || 0},${lastReview},${nextReview}\n`
+      csvContent += `${question},${answer},"${tags}",${levelText},${card.reviewCount || 0},${lastReview},${nextReview}\n`
     })
 
     const fs = wx.getFileSystemManager()

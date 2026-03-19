@@ -164,7 +164,8 @@ Page({
         let lastReview = ''
         let nextReview = ''
 
-        // 导出格式：问题，答案，标签，掌握程度，复习次数，上次复习，下次复习
+        // 导出格式：question,answer,tags,level,reviewCount,lastReview,nextReview
+        // 或者旧格式：问题，答案，标签，掌握程度，复习次数，上次复习，下次复习
         for (let j = 2; j < parts.length; j++) {
           const part = parts[j].trim()
 
@@ -184,9 +185,21 @@ Page({
             break
           }
 
-          // 否则作为标签处理（支持 | 分隔符和逗号分隔符）
-          // 导出格式用 | 分隔多个标签，但也支持逗号分隔
-          const tagParts = part.split(/[|,,]/).map(t => t.trim()).filter(t => t)
+          // 检测是否是数字（复习次数）且下一个字段是日期格式
+          if (/^\d+$/.test(part) && j + 1 < parts.length) {
+            reviewCount = parseInt(part) || 0
+            // 检查下一个字段是否是日期
+            if (/^\d{4}-\d{2}-\d{2}$/.test(parts[j + 1].trim())) {
+              lastReview = parts[j + 1].trim()
+              if (j + 2 < parts.length) {
+                nextReview = parts[j + 2].trim()
+              }
+              break
+            }
+          }
+
+          // 否则作为标签处理（支持分号、| 分隔符）
+          const tagParts = part.split(/[;|]/).map(t => t.trim()).filter(t => t)
           tags.push(...tagParts)
         }
 
@@ -272,9 +285,18 @@ Page({
           i++ // 跳过下一个双引号
         } else {
           inQuotes = !inQuotes
+          current += char // 保留引号用于后续移除
         }
-      } else if ((char === ',' || char === ',') && !inQuotes) {
-        // 支持英文逗号和中文逗号作为列分隔符
+      } else if (char === ',' && !inQuotes) {
+        // 英文逗号作为列分隔符（CSV 标准）
+        // 移除包裹的引号
+        if (current.startsWith('"') && current.endsWith('"')) {
+          current = current.slice(1, -1).replace(/""/g, '"')
+        }
+        result.push(current)
+        current = ''
+      } else if (char === ',' && !inQuotes) {
+        // 中文逗号也作为列分隔符（兼容旧格式）
         result.push(current)
         current = ''
       } else {
@@ -282,6 +304,10 @@ Page({
       }
     }
 
+    // 处理最后一个字段
+    if (current.startsWith('"') && current.endsWith('"')) {
+      current = current.slice(1, -1).replace(/""/g, '"')
+    }
     result.push(current)
     return result.map(item => item.trim())
   },
@@ -369,8 +395,8 @@ Page({
    * 下载模板
    */
   downloadTemplate() {
-    // CSV 模板内容 - 完整格式（包含学习数据）
-    const template = '问题，答案，标签，掌握程度，复习次数，上次复习，下次复习\n"Java 中==和 equals () 的区别？","==比较值或地址；equals() 可重写比较内容","Java 基础，面试高频",熟练，5,2026-03-15,2026-04-15\n"HashMap 的底层实现？","数组 + 链表 + 红黑树，jdk1.8 后链表长度>8 转红黑树",集合，熟悉，3,2026-03-10,2026-03-25'
+    // CSV 模板内容 - 新格式（英文逗号分隔，标准 CSV 格式）
+    const template = 'question,answer,tags,level,reviewCount,lastReview,nextReview\n"Java 中==和 equals() 的区别？","==比较值或地址；equals() 可重写比较内容","Java 基础;面试高频",熟练，5,2026-03-15,2026-04-15\n"HashMap 的底层实现？","数组 + 链表 + 红黑树，jdk1.8 后链表长度>8 转红黑树","集合",熟悉，3,2026-03-10,2026-03-25'
 
     const fileName = '闪卡导入模板.csv'
 
@@ -387,7 +413,7 @@ Page({
 
         wx.showModal({
           title: '模板已生成',
-          content: '模板包含完整格式（问题，答案，标签，掌握程度，复习次数，上次复习，下次复习）\n\n可以选择用其他应用打开或保存文件',
+          content: '模板包含完整格式（question,answer,tags,level,reviewCount,lastReview,nextReview）\n\n可以选择用其他应用打开或保存文件',
           showCancel: false,
           confirmText: '打开文件',
           success: () => {
