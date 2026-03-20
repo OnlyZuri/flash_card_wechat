@@ -115,20 +115,16 @@
   transform: translateX(4rpx);
 }
 
-.menu-icon {
-  font-size: 44rpx;
+.menu-icon-img {
+  width: 44rpx;
+  height: 44rpx;
   margin-right: 24rpx;
-  width: 56rpx;
-  height: 56rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: linear-gradient(135deg, #F2F2F7 0%, #E5E5EA 100%);
   border-radius: 16rpx;
+  padding: 6rpx;
 }
 
-.menu-icon.warning {
-  font-size: 40rpx;
+.menu-icon-img.warning {
   background: linear-gradient(135deg, #FFF5F5 0%, #FFE5E5 100%);
 }
 
@@ -208,8 +204,9 @@
   border: 2rpx solid #007AFF;
 }
 
-.export-modal .option-icon {
-  font-size: 48rpx;
+.export-modal .option-icon-img {
+  width: 48rpx;
+  height: 48rpx;
   margin-right: 20rpx;
 }
 

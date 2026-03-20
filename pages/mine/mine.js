@@ -303,10 +303,21 @@ Page({
    * 显示关于
    */
   showAbout() {
+    const accountInfo = wx.getAccountInfoSync()
+    const version = accountInfo.miniProgram.version || 'dev'
+    const envVersion = accountInfo.miniProgram.envVersion || 'develop'
+
+    const envVersionText = {
+      'develop': '开发版',
+      'trial': '体验版',
+      'release': '正式版'
+    }[envVersion] || envVersion
+
     wx.showModal({
-      title: '关于 Java 面试闪卡',
-      content: '版本：v1.0.0\n\n基于艾宾浩斯遗忘曲线的闪卡学习工具，帮助你高效记忆 Java 面试知识点。\n\n开发日期：2026 年',
-      showCancel: false
+      title: '关于 FlashCardLearning',
+      content: `版本：v${version} (${envVersionText})\n\n基于艾宾浩斯遗忘曲线的闪卡学习工具，适合各种学习场景，帮助你高效记忆知识点。`,
+      showCancel: false,
+      confirmText: '知道了'
     })
   },
 

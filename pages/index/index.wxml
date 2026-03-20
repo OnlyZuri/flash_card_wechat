@@ -30,14 +30,14 @@
   <view class="quick-actions-section">
     <view class="action-card primary" bindtap="startReview">
       <view class="action-icon-wrap">
-        <text class="action-icon-large">📚</text>
+        <image class="action-icon-img" src="/images/study-icon.png" mode="aspectFit" />
       </view>
       <text class="action-title">开始学习</text>
       <text class="action-subtitle" wx:if="{{dueCount + newCount > 0}}">{{dueCount + newCount}} 张卡片待学习</text>
     </view>
     <view class="action-card" bindtap="browseCards">
       <view class="action-icon-wrap">
-        <text class="action-icon-large">📖</text>
+        <image class="action-icon-img" src="/images/cards-icon.png" mode="aspectFit" />
       </view>
       <text class="action-title">卡片库</text>
       <text class="action-subtitle">共 {{totalCount}} 张卡片</text>
@@ -50,7 +50,7 @@
       <text class="section-title">提醒</text>
     </view>
     <view class="reminder-card overdue" bindtap="reviewOverdue">
-      <view class="reminder-icon">⚠️</view>
+      <image class="reminder-icon-img" src="/images/warning-icon.png" mode="aspectFit" />
       <view class="reminder-content">
         <text class="reminder-title">有 {{overdueCount}} 张卡片已过期</text>
         <text class="reminder-desc">尽快复习以巩固记忆</text>
@@ -61,7 +61,7 @@
 
   <view class="section" wx:if="{{newCount > 0}}">
     <view class="new-cards-card" bindtap="startReview">
-      <view class="reminder-icon">✨</view>
+      <image class="reminder-icon-img" src="/images/sparkle-icon.png" mode="aspectFit" />
       <view class="reminder-content">
         <text class="reminder-title">有 {{newCount}} 张新卡片</text>
         <text class="reminder-desc">开始学习新知识</text>
@@ -110,16 +110,16 @@
 
   <!-- 空状态 -->
   <view class="empty-state" wx:if="{{totalCount === 0}}">
-    <view class="empty-icon">📝</view>
+    <image class="empty-icon-img" src="/images/edit-icon.png" mode="aspectFit" />
     <text class="empty-title">还没有卡片</text>
     <text class="empty-desc">导入 Excel/CSV 或手动添加卡片开始学习</text>
     <view class="empty-actions">
       <view class="action-card empty-action" bindtap="goImport">
-        <text class="action-icon">📥</text>
+        <image class="empty-action-icon" src="/images/import-icon.png" mode="aspectFit" />
         <text class="action-text">导入数据</text>
       </view>
       <view class="action-card empty-action" bindtap="addCard">
-        <text class="action-icon">✍️</text>
+        <image class="empty-action-icon" src="/images/edit-icon.png" mode="aspectFit" />
         <text class="action-text">手动添加</text>
       </view>
     </view>

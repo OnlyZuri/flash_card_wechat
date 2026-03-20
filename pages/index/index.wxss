@@ -119,16 +119,17 @@
   transition: all 0.2s;
 }
 
+.action-icon-img {
+  width: 48rpx;
+  height: 48rpx;
+}
+
 .action-card.primary .action-icon-wrap {
   background-color: rgba(255, 255, 255, 0.25);
 }
 
 .action-card:not(.primary) .action-icon-wrap {
   background: linear-gradient(135deg, #D4EBFA 0%, #B8DAF5 100%);
-}
-
-.action-icon-large {
-  font-size: 48rpx;
 }
 
 .action-title {
@@ -236,8 +237,9 @@
   color: #48BB78;
 }
 
-.reminder-icon {
-  font-size: 44rpx;
+.reminder-icon-img {
+  width: 44rpx;
+  height: 44rpx;
   margin-right: 20rpx;
 }
 
@@ -385,9 +387,15 @@
   padding: 100rpx 40rpx;
 }
 
-.empty-icon {
-  font-size: 120rpx;
+.empty-icon-img {
+  width: 120rpx;
+  height: 120rpx;
   margin-bottom: 32rpx;
+}
+
+.empty-action-icon {
+  width: 56rpx;
+  height: 56rpx;
 }
 
 .empty-title {
@@ -426,10 +434,6 @@
 .action-card.empty-action:active {
   transform: scale(0.96);
   box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
-}
-
-.action-card.empty-action .action-icon {
-  font-size: 56rpx;
 }
 
 .action-card.empty-action .action-text {

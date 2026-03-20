@@ -2,7 +2,7 @@
   <!-- 导入说明 -->
   <view class="section">
     <view class="info-card">
-      <view class="info-icon">💡</view>
+      <view class="info-icon emoji-icon">💡</view>
       <view class="info-content">
         <text class="info-title">如何导入？</text>
         <text class="info-desc">CSV 文件：推荐使用，含逗号的内容用双引号包裹\nExcel 用户：请在 WPS/Excel 中另存为 CSV 格式</text>
@@ -54,7 +54,7 @@
   <!-- 操作按钮 -->
   <view class="action-area">
     <view class="btn-select" bindtap="selectFile">
-      <text class="btn-icon">📁</text>
+      <text class="btn-icon emoji-icon">📁</text>
       <text class="btn-text">选择文件</text>
     </view>
     <view class="btn-import" wx:if="{{previewData.length > 0}}" bindtap="confirmImport">
