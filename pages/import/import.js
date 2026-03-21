@@ -198,8 +198,8 @@ Page({
             }
           }
 
-          // 否则作为标签处理（支持分号、| 分隔符）
-          const tagParts = part.split(/[;|]/).map(t => t.trim()).filter(t => t)
+          // 否则作为标签处理（优先使用英文分号分隔，兼容 | 分隔）
+          const tagParts = part.split(';').map(t => t.trim()).filter(t => t)
           tags.push(...tagParts)
         }
 
@@ -395,8 +395,8 @@ Page({
    * 下载模板
    */
   downloadTemplate() {
-    // CSV 模板内容 - 新格式（英文逗号分隔，标准 CSV 格式）
-    const template = 'question,answer,tags,level,reviewCount,lastReview,nextReview\n"Java 中==和 equals() 的区别？","==比较值或地址；equals() 可重写比较内容","Java 基础;面试高频",熟练，5,2026-03-15,2026-04-15\n"HashMap 的底层实现？","数组 + 链表 + 红黑树，jdk1.8 后链表长度>8 转红黑树","集合",熟悉，3,2026-03-10,2026-03-25'
+    // CSV 模板内容 - 标准 CSV 格式（英文逗号分隔，标签用英文分号分隔）
+    const template = 'question,answer,tags,level,reviewCount,lastReview,nextReview\n"Java 中==和 equals() 的区别？","==比较值或地址；equals() 可重写比较内容","Java 基础;面试高频",熟练，5,2026-03-15,2026-04-15\n"HashMap 的底层实现？","数组 + 链表 + 红黑树，jdk1.8 后链表长度>8 转红黑树","集合",熟悉，3,2026-03-10,2026-03-25\n"什么是 CSS 盒模型？","由 content、padding、border、margin 组成","前端;CSS",熟悉，2,2026-03-12,2026-03-20'
 
     const fileName = '闪卡导入模板.csv'
 
@@ -413,7 +413,7 @@ Page({
 
         wx.showModal({
           title: '模板已生成',
-          content: '模板包含完整格式（question,answer,tags,level,reviewCount,lastReview,nextReview）\n\n可以选择用其他应用打开或保存文件',
+          content: '模板包含完整格式（question,answer,tags,level,reviewCount,lastReview,nextReview）\n\n标签说明：多个标签请使用英文分号 ; 分隔\n例如：Java 基础;面试高频;后端开发\n\n可以选择用其他应用打开或保存文件',
           showCancel: false,
           confirmText: '打开文件',
           success: () => {

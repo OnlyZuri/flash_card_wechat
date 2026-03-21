@@ -71,7 +71,7 @@
         <text class="tip-item">• CSV 文件：使用逗号分隔，内容含逗号请用双引号包裹</text>
         <text class="tip-item">• 第一列：问题（必填）</text>
         <text class="tip-item">• 第二列：答案（必填）</text>
-        <text class="tip-item">• 第三列：标签（可选，多个标签用 | 或逗号分隔）</text>
+        <text class="tip-item">• 第三列：标签（可选，多个标签用英文分号 ; 分隔）</text>
         <text class="tip-item">• 第四列：掌握程度（可选：生疏/模糊/熟悉/熟练）</text>
         <text class="tip-item">• 第五列：复习次数（可选）</text>
         <text class="tip-item">• 第六列：上次复习日期（可选，格式：YYYY-MM-DD）</text>

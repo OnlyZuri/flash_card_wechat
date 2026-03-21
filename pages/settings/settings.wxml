@@ -33,7 +33,7 @@
     </view>
     <view class="action-card card">
       <view class="action-item" bindtap="resetSettings">
-        <text class="action-icon">🔄</text>
+        <image class="action-icon-img" src="/images/refresh_blue.png" mode="aspectFit"></image>
         <text class="action-text">恢复默认设置</text>
       </view>
     </view>

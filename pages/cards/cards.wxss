@@ -136,6 +136,15 @@
   transition: all 0.2s;
 }
 
+.action-btn-icon {
+  width: 36rpx;
+  height: 36rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
 .action-btn.batch-cancel {
   background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
   box-shadow: 0 4rpx 12rpx rgba(245, 87, 108, 0.4);

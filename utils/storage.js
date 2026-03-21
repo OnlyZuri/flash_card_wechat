@@ -16,7 +16,7 @@ const TRASH_RETENTION_DAYS = 3
 /**
  * 卡片数据操作
  */
-export const cardStorage = {
+const cardStorage = {
   /**
    * 获取所有卡片
    */
@@ -212,7 +212,7 @@ export const cardStorage = {
 /**
  * 学习记录操作
  */
-export const studyLogStorage = {
+const studyLogStorage = {
   /**
    * 获取学习记录
    */
@@ -326,7 +326,7 @@ export const studyLogStorage = {
 /**
  * 回收站操作
  */
-export const trashStorage = {
+const trashStorage = {
   /**
    * 获取所有回收站卡片
    */
@@ -490,7 +490,7 @@ export const trashStorage = {
 /**
  * 设置操作
  */
-export const settingsStorage = {
+const settingsStorage = {
   /**
    * 获取设置
    */

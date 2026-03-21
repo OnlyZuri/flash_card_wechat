@@ -44,14 +44,14 @@
       <text class="list-count">共 {{filteredCards.length}} 张卡片</text>
       <view class="list-actions">
         <view class="action-btn" bindtap="toggleBatchMode" wx:if="{{!batchMode}}">
-          <text class="action-btn-icon">☑️</text>
+          <image class="action-btn-icon" src="/images/checkbox_white.png" mode="aspectFit"></image>
           <text class="action-btn-text">批量</text>
         </view>
         <view class="action-btn batch-cancel" bindtap="toggleBatchMode" wx:if="{{batchMode}}">
           <text class="action-btn-text">完成</text>
         </view>
         <view class="action-btn" bindtap="showAddMenu" wx:if="{{!batchMode}}">
-          <text class="action-btn-icon">+</text>
+          <image class="action-btn-icon" src="/images/plus_white.png" mode="aspectFit"></image>
           <text class="action-btn-text">添加</text>
         </view>
       </view>

@@ -73,6 +73,8 @@ function getRelativeDateDesc(date) {
 
 /**
  * 解析 CSV 内容
+ * 格式：question,answer,tags
+ * 标签字段使用英文分号 ; 分隔多个标签
  */
 function parseCSV(content) {
   const lines = content.split(/\r?\n/)
@@ -88,7 +90,7 @@ function parseCSV(content) {
       result.push({
         question: parts[0].trim(),
         answer: parts[1].trim(),
-        tags: parts[2] ? parts[2].split(/[,,]/).map(t => t.trim()).filter(t => t) : []
+        tags: parts[2] ? parts[2].split(';').map(t => t.trim()).filter(t => t) : []
       })
     }
   }

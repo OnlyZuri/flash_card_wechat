@@ -1,0 +1,77 @@
+<view class="container">
+  <!-- 提示信息 -->
+  <view class="tips">
+    <view class="tips-title">回收站说明</view>
+    <view class="tips-content">
+      <text>删除的卡片会在此保留 3 天</text>
+      <text>逾期将自动永久删除</text>
+    </view>
+  </view>
+
+  <!-- 操作栏 -->
+  <view class="action-bar">
+    <view class="action-left">
+      <button class="btn-batch" bindtap="toggleBatchMode">
+        {{batchMode ? '取消批量' : '批量操作'}}
+      </button>
+      <block wx:if="{{batchMode}}">
+        <button class="btn-restore" bindtap="toggleSelectAll">
+          {{selectedIds.length === recycleItems.length ? '取消全选' : '全选'}}
+        </button>
+      </block>
+    </view>
+    <view class="action-right">
+      <block wx:if="{{batchMode}}">
+        <button class="btn-restore-main" bindtap="batchRestore" disabled="{{selectedIds.length === 0}}">
+          恢复 ({{selectedIds.length}})
+        </button>
+        <button class="btn-delete-main" bindtap="batchPermanentlyDelete" disabled="{{selectedIds.length === 0}}">
+          永久删除
+        </button>
+      </block>
+      <block wx:else="{{recycleItems.length > 0}}">
+        <button class="btn-clear" bindtap="clearRecycleBin">
+          清空回收站
+        </button>
+      </block>
+    </view>
+  </view>
+
+  <!-- 回收站列表 -->
+  <view class="recycle-list" wx:if="{{recycleItems.length > 0}}">
+    <view class="recycle-item" wx:for="{{recycleItems}}" wx:key="_id || id">
+      <view class="item-checkbox" wx:if="{{batchMode}}" bindtap="toggleSelectOne" data-id="{{item._id || item.id}}">
+        <view class="checkbox {{selectedIds.indexOf(item._id || item.id) > -1 ? 'checked' : ''}}">
+          <text wx:if="{{selectedIds.indexOf(item._id || item.id) > -1}}">✓</text>
+        </view>
+      </view>
+
+      <view class="item-content" bindtap="viewCard" data-original-id="{{item.originalId}}">
+        <view class="item-question">{{item.question}}</view>
+        <view class="item-answer" wx:if="{{item.answer}}">{{item.answer}}</view>
+        <view class="item-meta">
+          <text class="delete-time">删除时间：{{item.deletedDate}}</text>
+          <text class="remain-days {{item.remainDays === 0 ? 'expired' : ''}}">
+            {{item.remainDays === 0 ? '已过期' : '剩余' + item.remainDays + '天'}}
+          </text>
+        </view>
+      </view>
+
+      <view class="item-actions" wx:if="{{!batchMode}}">
+        <button class="btn-restore-small" bindtap="restoreCard" data-id="{{item._id || item.id}}">
+          恢复
+        </button>
+        <button class="btn-delete-small" bindtap="permanentlyDeleteCard" data-id="{{item._id || item.id}}">
+          永久删除
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty" wx:if="{{recycleItems.length === 0}}">
+    <image class="empty-icon" src="/images/empty.png" mode="aspectFit" wx:if="{{false}}" />
+    <view class="empty-text">回收站为空</view>
+    <view class="empty-hint">删除的卡片会显示在这里</view>
+  </view>
+</view>

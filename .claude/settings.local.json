@@ -60,7 +60,20 @@
       "Bash(powershell -Command \"Invoke-WebRequest -Uri 'https://em-content.zobj.net/source/apple/391/graduation-cap_1f393.png' -OutFile 'D:\\\\\\\\flash_card_wechat-main\\\\\\\\images\\\\\\\\study-icon.png'\")",
       "Bash(powershell -Command \"Invoke-WebRequest -Uri 'https://em-content.zobj.net/source/apple/391/brain_1f9e0.png' -OutFile 'D:\\\\\\\\flash_card_wechat-main\\\\\\\\images\\\\\\\\study-icon.png'\")",
       "Bash(powershell -Command \"Invoke-WebRequest -Uri 'https://em-content.zobj.net/source/apple/391/open-book_1f4d6.png' -OutFile 'D:\\\\\\\\flash_card_wechat-main\\\\\\\\images\\\\\\\\study-icon.png'\")",
-      "Bash(findstr -i \"export import\")"
+      "Bash(findstr -i \"export import\")",
+      "Bash(npm install:*)",
+      "Bash(npm test:*)",
+      "Bash(npx jest:*)",
+      "Bash(node node_modules/jest/bin/jest)",
+      "Bash(ls -la *.json)",
+      "Bash(Select-Object -First 20)",
+      "Bash(npm config:*)",
+      "Bash(yarn install:*)",
+      "Bash(npm cache:*)",
+      "Bash(npx --yes jest@^29.7.0 --version)",
+      "Bash(npx --yes jest@^29.7.0 --config=jest.config.js)",
+      "Bash(ls -la *.svg)",
+      "Bash(ls -la *.png)"
     ]
   }
 }
